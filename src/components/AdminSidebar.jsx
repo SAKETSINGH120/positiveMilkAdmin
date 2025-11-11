@@ -682,6 +682,13 @@ const AdminSidebar = ({ collapsed, settingData }) => {
             onClick: () => navigate("/admin/user"),
             permissions: ["LIST_USERS"],
           },
+          {
+            key: "users",
+            icon: <FaRegUser size={18} />,
+            label: "Low Balance Users",
+            onClick: () => navigate("/admin/low-balance-lists"),
+            permissions: ["LIST_USERS_BALANCE"],
+          },
         ],
       },
       {

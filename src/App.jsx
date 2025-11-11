@@ -79,6 +79,7 @@ import SubscriptionList from "./pages/admin/subscriptions/SubscriptionList";
 import SubscriptionDetails from "./pages/admin/subscriptions/components/SubscriptionDetails";
 import CategorywiseOrders from "./pages/admin/Order/components/CategorywiseOrder";
 import SupportList from "./pages/admin/support/SupportList";
+import UserLowBalanceList from "./pages/admin/balance/UserLowbalanceListing";
 
 function App() {
   return (
@@ -153,6 +154,7 @@ function App() {
             element={<FarmerCollectionsListing />}
           />
           <Route path="support" element={<SupportList />} />
+          <Route path="low-balance-lists" element={<UserLowBalanceList />} />
         </Route>
 
         {/* vendor route */}

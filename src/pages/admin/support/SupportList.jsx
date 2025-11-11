@@ -42,6 +42,12 @@ function SupportQueryList() {
       render: (_, record) => record.userId?.name || "-",
     },
     {
+      title: "Mobile",
+      dataIndex: ["userId", "mobileNo"],
+      key: "mobileNo",
+      render: (_, record) => record.userId?.mobileNo || "-",
+    },
+    {
       title: "Category/Title",
       dataIndex: "categoryTitlte",
       key: "categoryTitlte",
@@ -60,7 +66,17 @@ function SupportQueryList() {
       title: "Created At",
       dataIndex: "createdAt",
       key: "createdAt",
-      render: (date) => (date ? new Date(date).toLocaleDateString() : "-"),
+      render: (date) =>
+        date
+          ? new Date(date).toLocaleString("en-US", {
+              year: "numeric",
+              month: "2-digit",
+              day: "2-digit",
+              hour: "2-digit",
+              minute: "2-digit",
+              hour12: true,
+            })
+          : "-",
     },
     // {
     //   title: "Actions",
