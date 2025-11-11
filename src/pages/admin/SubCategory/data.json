@@ -1,0 +1,72 @@
+[
+    {
+        "key": "1",
+        "categoryName": "Electronics",
+        "subCategoryName": "Smartphones",
+        "status": "active",
+        "image": "smartphones.jpg"
+    },
+    {
+        "key": "2",
+        "categoryName": "Electronics",
+        "subCategoryName": "Laptops",
+        "status": "active",
+        "image": "laptops.jpg"
+    },
+    {
+        "key": "3",
+        "categoryName": "Fashion",
+        "subCategoryName": "Men's Clothing",
+        "status": "active",
+        "image": "mens-clothing.jpg"
+    },
+    {
+        "key": "4",
+        "categoryName": "Fashion",
+        "subCategoryName": "Women's Clothing",
+        "status": "active",
+        "image": "womens-clothing.jpg"
+    },
+    {
+        "key": "5",
+        "categoryName": "Home & Garden",
+        "subCategoryName": "Furniture",
+        "status": "active",
+        "image": "furniture.jpg"
+    },
+    {
+        "key": "6",
+        "categoryName": "Home & Garden",
+        "subCategoryName": "Garden Tools",
+        "status": "active",
+        "image": "garden-tools.jpg"
+    },
+    {
+        "key": "7",
+        "categoryName": "Sports",
+        "subCategoryName": "Fitness Equipment",
+        "status": "active",
+        "image": "fitness.jpg"
+    },
+    {
+        "key": "8",
+        "categoryName": "Sports",
+        "subCategoryName": "Team Sports",
+        "status": "active",
+        "image": "team-sports.jpg"
+    },
+    {
+        "key": "9",
+        "categoryName": "Books",
+        "subCategoryName": "Fiction",
+        "status": "active",
+        "image": "fiction-books.jpg"
+    },
+    {
+        "key": "10",
+        "categoryName": "Books",
+        "subCategoryName": "Non-Fiction",
+        "status": "active",
+        "image": "non-fiction-books.jpg"
+    }
+]
