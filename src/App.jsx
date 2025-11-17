@@ -80,6 +80,7 @@ import SubscriptionDetails from "./pages/admin/subscriptions/components/Subscrip
 import CategorywiseOrders from "./pages/admin/Order/components/CategorywiseOrder";
 import SupportList from "./pages/admin/support/SupportList";
 import UserLowBalanceList from "./pages/admin/balance/UserLowbalanceListing";
+import ReportsList from "./pages/admin/report/ReportsList";
 
 function App() {
   return (
@@ -148,6 +149,7 @@ function App() {
           <Route path="manage-admin/edit/:id" element={<EditAdmin />} />
           <Route path="subscription" element={<SubscriptionList />} />
           <Route path="subscription/:id" element={<SubscriptionDetails />} />
+          <Route path="reports" element={<ReportsList />} />
           <Route path="dairy-farmer" element={<FarmersListing />} />
           <Route
             path="dairy-collections"

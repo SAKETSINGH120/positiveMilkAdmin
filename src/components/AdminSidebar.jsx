@@ -819,7 +819,7 @@ const AdminSidebar = ({ collapsed, settingData }) => {
       },
       {
         type: "group",
-        label: "subscription",
+        label: "Subscription",
         children: [
           {
             key: "subscriptions",
@@ -827,6 +827,19 @@ const AdminSidebar = ({ collapsed, settingData }) => {
             label: "Subscriptions",
             onClick: () => navigate("/admin/subscription"),
             permissions: ["MANAGE_SUBSCRIPTION"],
+          },
+        ],
+      },
+      {
+        type: "group",
+        label: "Report Management",
+        children: [
+          {
+            key: "reports",
+            icon: <MdSubscriptions size={18} />,
+            label: "All Reports",
+            onClick: () => navigate("/admin/reports"),
+            permissions: ["MANAGE_REPORTS"],
           },
         ],
       },
