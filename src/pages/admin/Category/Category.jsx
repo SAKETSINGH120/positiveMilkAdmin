@@ -1,69 +1,69 @@
-import React, { useEffect, useState } from 'react'
-import { Breadcrumb, Button, Input, message, Modal, Spin } from 'antd'
-import { FaPlus } from 'react-icons/fa'
-import { Link } from 'react-router'
-import CategoryTable from './components/CategoryTable'
-import AddCategoryModel from './components/AddCategoryModel'
-import EditCategoryModel from './components/EditCategoryModel'
-import { deleteCategory, getAllCategory } from '@services/apiCategory'
-import { usePermissions } from '../../../hooks/usePermissions'
+import React, { useEffect, useState } from "react";
+import { Breadcrumb, Button, Input, message, Modal, Spin } from "antd";
+import { FaPlus } from "react-icons/fa";
+import { Link } from "react-router";
+import CategoryTable from "./components/CategoryTable";
+import AddCategoryModel from "./components/AddCategoryModel";
+import EditCategoryModel from "./components/EditCategoryModel";
+import { deleteCategory, getAllCategory } from "@services/apiCategory";
+import { usePermissions } from "../../../hooks/usePermissions";
 
 function Category() {
-  const [categories, setCategories] = useState([])
-  const [loading, setLoading] = useState(false)
-  const [searchText, setSearchText] = useState('')
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [editMode, setEditMode] = useState(false)
-  const [selectedCategory, setSelectedCategory] = useState(null)
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [searchText, setSearchText] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editMode, setEditMode] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
-  const { hasPermission } = usePermissions()
+  const { hasPermission } = usePermissions();
 
   const fetchCategories = async () => {
-    setLoading(true)
+    setLoading(true);
     try {
-      const data = await getAllCategory()
-      setCategories(data)
+      const data = await getAllCategory();
+      setCategories(data);
     } catch {
-      message.error('Failed to load categories.')
+      message.error("Failed to load categories.");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   useEffect(() => {
-    fetchCategories()
-  }, [])
+    fetchCategories();
+  }, []);
 
   const openModal = (category = null) => {
-    setSelectedCategory(category)
-    setEditMode(!!category)
-    setIsModalOpen(true)
-  }
+    setSelectedCategory(category);
+    setEditMode(!!category);
+    setIsModalOpen(true);
+  };
 
   const closeModal = (refresh = false) => {
-    setIsModalOpen(false)
-    setSelectedCategory(null)
-    if (refresh) fetchCategories()
-  }
+    setIsModalOpen(false);
+    setSelectedCategory(null);
+    if (refresh) fetchCategories();
+  };
 
   const handleDelete = (category) => {
     Modal.confirm({
-      title: 'Delete Category',
-      content: `Are you sure you want to delete "${category.name}"?`,
-      okText: 'Yes, Delete',
-      okType: 'danger',
-      cancelText: 'No, Cancel',
+      title: "Delete Category",
+      content: `Are you sure you want to delete "${category?.name}"?`,
+      okText: "Yes, Delete",
+      okType: "danger",
+      cancelText: "No, Cancel",
       onOk: async () => {
         try {
-          await deleteCategory(category._id)
-          message.success('Category deleted successfully!')
-          fetchCategories()
+          await deleteCategory(category._id);
+          message.success("Category deleted successfully!");
+          fetchCategories();
         } catch {
-          message.error('Failed to delete category.')
+          message.error("Failed to delete category.");
         }
       },
-    })
-  }
+    });
+  };
 
   // if (loading) return <Spin size="large" fullscreen />;
 
@@ -73,11 +73,16 @@ function Category() {
         <Input.Search
           placeholder="Search by name"
           onChange={(e) => setSearchText(e.target.value)}
-          style={{ maxWidth: 300, borderRadius: '6px' }}
+          style={{ maxWidth: 300, borderRadius: "6px" }}
           size="large"
         />
-        {hasPermission(['CREATE_CATEGORY']) && (
-          <Button type="primary" icon={<FaPlus />} size="large" onClick={() => openModal()}>
+        {hasPermission(["CREATE_CATEGORY"]) && (
+          <Button
+            type="primary"
+            icon={<FaPlus />}
+            size="large"
+            onClick={() => openModal()}
+          >
             Add Category
           </Button>
         )}
@@ -107,7 +112,7 @@ function Category() {
         />
       )}
     </>
-  )
+  );
 }
 
-export default Category
+export default Category;

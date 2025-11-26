@@ -60,7 +60,7 @@ const CategoryTable = ({
       dataIndex: "serviceId",
       key: "name",
       align: "center",
-      render: (_, record) => <>{record.serviceId.name}</>,
+      render: (_, record) => <>{record.serviceId?.name}</>,
     },
     {
       title: "Priority",
