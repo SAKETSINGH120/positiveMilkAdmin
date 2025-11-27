@@ -142,7 +142,7 @@ function AdminLayout() {
             <div className="px-4 mb-4">
               <Breadcrumb items={breadcrumbItems} />
             </div>
-            <OrderListener role="admin" />
+            {/* <OrderListener role="admin" /> */}
             <Outlet />
           </Content>
           <AdminFooter settingData={settingData} />

@@ -32,9 +32,9 @@ function EditCategoryModel({
     if (categoryData) {
       form.setFieldsValue({
         categoryName: categoryData.name,
-        gst: categoryData.gst,
+        gst: Number(categoryData.gst),
         type: categoryData.type,
-        serviceId: categoryData.serviceId._id,
+        serviceId: categoryData.serviceId?._id,
         priority: categoryData.priority || "no-priority",
       });
       setImageUrl(categoryData.image);
