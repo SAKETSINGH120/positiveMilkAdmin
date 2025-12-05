@@ -132,6 +132,13 @@ const OrderTable = ({ searchText, type, service, onCountsUpdate }) => {
       align: "center",
     },
     {
+      title: "Pincode",
+      dataIndex: "pincode",
+      key: "pincode",
+      align: "center",
+      render: (pincode) => `${pincode}`,
+    },
+    {
       title: "Total Amount",
       dataIndex: "finalTotalPrice",
       key: "finalTotalPrice",
