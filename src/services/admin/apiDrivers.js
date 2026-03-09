@@ -1,3 +1,14 @@
+// Change driver password
+export const changeDriverPassword = async (driverId, newPassword) => {
+  try {
+    const response = await axiosInstance.patch(`/api/admin/driver/change-password/${driverId}`, { password: newPassword });
+    return response.data;
+  } catch (error) {
+    const errorMsg = error?.response?.data?.message || 'Error changing password';
+    message.error(errorMsg);
+    throw error;
+  }
+};
 import { message } from "antd";
 import axiosInstance from "@utils/axiosInstance";
 

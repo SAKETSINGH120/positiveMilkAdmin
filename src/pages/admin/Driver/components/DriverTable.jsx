@@ -2,9 +2,10 @@ import {
     Avatar, Badge, Button, Input, InputNumber, message,
     Modal, Space, Spin, Switch, Table, Tag, Tooltip
 } from 'antd';
-import { FaEdit, FaTrash, FaUserTie } from 'react-icons/fa';
+import { FaEdit, FaTrash, FaUserTie, FaKey } from 'react-icons/fa';
 import { useState } from 'react';
 import { updateDriverBlockStatus, updateDriverStatus } from '../../../../services/admin/apiDrivers';
+import { changeDriverPassword } from '../../../../services/admin/apiDrivers'; // You may need to implement this API
 import { settleDriverWallet } from '../../../../services/admin/apiWallet'; // Make sure this is appropriate
 import { useNavigate } from 'react-router';
 import { IoMdEye } from 'react-icons/io';
@@ -16,6 +17,32 @@ const DriverTable = ({ searchText, data, loading, onSettleSuccess, activeTab }) 
     const [settleAmount, setSettleAmount] = useState(0);
     const [remarks, setRemarks] = useState('');
     const [settleType, setSettleType] = useState('wallet'); // 'wallet' or 'cash'
+
+    // Change password modal state
+    const [isPasswordModalVisible, setIsPasswordModalVisible] = useState(false);
+    const [newPassword, setNewPassword] = useState('');
+    // Open change password modal
+    const openPasswordModal = (driver) => {
+        setSelectedDriver(driver);
+        setNewPassword('');
+        setIsPasswordModalVisible(true);
+    };
+
+    // Handle password change
+    const handleChangePassword = async () => {
+        if (!newPassword || newPassword.length < 6) {
+            message.error('Password must be at least 6 characters');
+            return;
+        }
+        try {
+            await changeDriverPassword(selectedDriver._id, newPassword);
+            message.success('Password changed successfully');
+            setIsPasswordModalVisible(false);
+        } catch (error) {
+            console.error('Password change error:', error);
+            message.error('Failed to change password');
+        }
+    };
 
     const navigate = useNavigate();
 
@@ -199,6 +226,13 @@ const DriverTable = ({ searchText, data, loading, onSettleSuccess, activeTab }) 
                             onClick={() => navigate(`${record._id}`)}
                         />
                     </Tooltip>
+                    <Tooltip title="Change Password">
+                        <Button
+                            type="default"
+                            icon={<FaKey />}
+                            onClick={() => openPasswordModal(record)}
+                        />
+                    </Tooltip>
                 </Space>
             )
         }
@@ -244,6 +278,21 @@ const DriverTable = ({ searchText, data, loading, onSettleSuccess, activeTab }) 
                     value={remarks}
                     onChange={(e) => setRemarks(e.target.value)}
                     rows={3}
+                />
+            </Modal>
+
+            <Modal
+                title={`Change Password - ${selectedDriver?.name}`}
+                open={isPasswordModalVisible}
+                onCancel={() => setIsPasswordModalVisible(false)}
+                onOk={handleChangePassword}
+                okText="Change"
+            >
+                <Input.Password
+                    placeholder="Enter new password"
+                    value={newPassword}
+                    onChange={e => setNewPassword(e.target.value)}
+                    style={{ width: '100%', marginBottom: 10 }}
                 />
             </Modal>
         </>
