@@ -59,7 +59,7 @@ const FoodProduct = () => {
   }, []);
 
   const transformedSubCategories = subCategories.reduce((acc, subCat) => {
-    const catId = subCat.cat_id._id;
+    const catId = subCat?.cat_id?._id;
     if (!acc[catId]) acc[catId] = [];
     acc[catId].push(subCat);
     return acc;
@@ -120,7 +120,7 @@ const FoodProduct = () => {
             size="large"
             onClick={() => setIsModalOpen(true)}
           >
-            Add Product
+            Add Products
           </Button>
         )}
 
