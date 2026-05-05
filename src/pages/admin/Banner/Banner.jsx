@@ -54,6 +54,7 @@ function MainBanner() {
     const handleEditOk = () => {
         setIsEditModalOpen(false);
         setSelectedBanner(null);
+        fetchBanner();
     };
 
     const handleEditCancel = () => {

@@ -57,10 +57,12 @@ function SupportQueryList() {
       title: "Query",
       dataIndex: "queryData",
       key: "queryData",
-      render: (queryData) =>
-        queryData?.length > 80
-          ? `${queryData.substring(0, 80)}...`
-          : queryData || "-",
+      width: 300, // Set a fixed width for the column
+      render: (queryData) => (
+        <div style={{ whiteSpace: "pre-wrap", wordWrap: "break-word" }}>
+          {queryData || "-"}
+        </div>
+      ),
     },
     {
       title: "Created At",

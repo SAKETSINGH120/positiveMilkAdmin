@@ -104,6 +104,16 @@ export const processRefund = async (userId, refundData) => {
   }
 };
 
+export const getFailedOrders = async () => {
+  try {
+    const response = await axiosInstance.get(`/api/admin/failed-orders`);
+    return response.data;
+  } catch (error) {
+    message.error(error.response?.data?.message || "Error fetching failed orders");
+    throw error;
+  }
+};
+
 // Get categorywise order details
 export const getCategorywiseOrderDetails = async () => {
   try {

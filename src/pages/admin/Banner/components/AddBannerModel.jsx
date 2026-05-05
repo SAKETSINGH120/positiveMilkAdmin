@@ -4,12 +4,26 @@ import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import { useState, useEffect } from "react";
 import dataURLtoFile from "../../../../utils/fileConverter";
 import { addBanner } from "../../../../services/admin/apiBanner";
+import { getAllSubCategory } from "@services/apiCategory";
 
 const AddBannerModel = ({ isModalOpen, handleOk, handleCancel }) => {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const [fileList, setFileList] = useState([]);
   const [imageUrl, setImageUrl] = useState(null);
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const fetchSubCategories = async () => {
+      try {
+        const data = await getAllSubCategory();
+        setCategories(data || []);
+      } catch (error) {
+        console.error("Failed to fetch subcategories:", error);
+      }
+    };
+    fetchSubCategories();
+  }, []);
 
   const serviceTypeValue = Form.useWatch("serviceType", form);
 
@@ -30,8 +44,8 @@ const AddBannerModel = ({ isModalOpen, handleOk, handleCancel }) => {
     serviceTypeValue === "67ecc79120a93fc0b92a8b19"
       ? foodSections
       : serviceTypeValue === "67ecc79a20a93fc0b92a8b1b"
-      ? grocerySections
-      : [];
+        ? grocerySections
+        : [];
 
   useEffect(() => {
     form.setFieldsValue({ chooeseSection: undefined });
@@ -96,6 +110,12 @@ const AddBannerModel = ({ isModalOpen, handleOk, handleCancel }) => {
     formData.append("title", values.title);
     formData.append("section", values.chooeseSection);
     formData.append("serviceId", values.serviceType);
+    if (values.categoryId) {
+      formData.append("categoryId", values.categoryId);
+    }
+    if (values.link) {
+      formData.append("link", values.link);
+    }
     formData.append("image", file);
 
     try {
@@ -177,6 +197,31 @@ const AddBannerModel = ({ isModalOpen, handleOk, handleCancel }) => {
             disabled={!serviceTypeValue}
             options={sectionOptions}
           />
+        </Form.Item>
+
+        <Form.Item label="Category" name="categoryId">
+          <Select
+            placeholder="Select category (e.g., Cow Milk)"
+            allowClear
+            showSearch
+            optionFilterProp="label"
+            options={categories
+              .filter(cat => {
+                const parentServiceId = cat.cat_id?.serviceId?._id || cat.cat_id?.serviceId;
+                const subServiceId = cat.serviceId?._id || cat.serviceId;
+                const finalServiceId = parentServiceId || subServiceId;
+                return (!serviceTypeValue || finalServiceId === serviceTypeValue) &&
+                  !cat.name?.toLowerCase().includes("ghee");
+              })
+              .map((cat) => ({
+                value: cat._id,
+                label: cat.name?.replace(/^A2\s+/i, ""),
+              }))}
+          />
+        </Form.Item>
+
+        <Form.Item label="Back Link" name="link">
+          <Input placeholder="Enter back link (optional)" />
         </Form.Item>
 
         <Form.Item label="Banner Image" required>

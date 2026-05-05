@@ -41,6 +41,22 @@ const BannerTable = ({ searchText, onEdit, onDelete, data, loading, hasPermissio
             key: 'section',
             align: "center"
         },
+        {
+            title: 'Category',
+            key: 'category',
+            align: "center",
+            render: (_, record) => record.categoryId?.name || "N/A"
+        },
+        {
+            title: 'Back Link',
+            key: 'link',
+            align: "center",
+            render: (_, record) => record.link ? (
+                <a href={record.link} target="_blank" rel="noreferrer" style={{ maxWidth: '150px', display: 'inline-block', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                    {record.link}
+                </a>
+            ) : "N/A"
+        },
         // {
         //     title: 'Status',
         //     dataIndex: 'status',
@@ -61,9 +77,9 @@ const BannerTable = ({ searchText, onEdit, onDelete, data, loading, hasPermissio
             align: "right",
             render: (_, record) => (
                 <Space size="small">
-                    {/* <Button type="primary" icon={<FaEdit />} onClick={() => onEdit(record)}>Edit</Button> */}
+                    <Button type="primary" icon={<FaEdit />} onClick={() => onEdit(record)}>Edit</Button>
                     {hasPermission(['DELETE_BANNER']) && (
-                    <Button type="primary" danger icon={<FaTrash />} onClick={() => onDelete(record)}>Delete</Button>)}
+                        <Button type="primary" danger icon={<FaTrash />} onClick={() => onDelete(record)}>Delete</Button>)}
                 </Space>
             )
         }

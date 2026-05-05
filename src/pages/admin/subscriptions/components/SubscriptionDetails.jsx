@@ -75,7 +75,7 @@ function SubscriptionDetails() {
           </Col>
           <Col span={18}>
             <Descriptions
-              column={1}
+              column={2}
               size="middle"
               labelStyle={{ fontWeight: 500 }}
             >
@@ -115,6 +115,16 @@ function SubscriptionDetails() {
                 {subscription.productId?.sellingPrice ||
                   subscription.productId?.mrp ||
                   "-"}
+              </Descriptions.Item>
+              <Descriptions.Item label="Pause Period">
+                {subscription.pauseStartDate && subscription.pauseEndDate
+                  ? `${new Date(subscription.pauseStartDate).toLocaleDateString()} - ${new Date(subscription.pauseEndDate).toLocaleDateString()}`
+                  : "--"}
+              </Descriptions.Item>
+              <Descriptions.Item label="Modification Details">
+                {subscription.modifyStartDate || subscription.modifyEndDate || subscription.modifyQuantity
+                  ? `Start: ${subscription.modifyStartDate ? new Date(subscription.modifyStartDate).toLocaleDateString() : "--"}, End: ${subscription.modifyEndDate ? new Date(subscription.modifyEndDate).toLocaleDateString() : "--"}, Quantity: ${subscription.modifyQuantity ?? "--"}`
+                  : "--"}
               </Descriptions.Item>
               {/* <Descriptions.Item label="Purchesd At">
                 {subscription.createdAt ? new Date(subscription.createdAt).toLocaleString() : '-'}

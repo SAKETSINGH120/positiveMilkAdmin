@@ -19,3 +19,13 @@ export const getUserGocoinHistory = async (userId) => {
     const response = await axiosInstance.get(`/api/admin/user/${userId}/settlement/history`)
     return response.data;
 }
+
+export const updateUserWallet = async (userId, data) => {
+    const response = await axiosInstance.post(`/api/admin/user/${userId}/wallet/update`, data)
+    return response.data;
+}
+
+export const getUserByMobile = async (mobileNo) => {
+    const response = await axiosInstance.get(`/api/admin/user/list?mobileNo=${mobileNo}`)
+    return response.data;
+}

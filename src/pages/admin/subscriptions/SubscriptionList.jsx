@@ -66,6 +66,31 @@ function SubscriptionList() {
       render: (_, record) => record.frequency?.type || "-",
     },
     {
+    title: "Pause Period",
+    key: "pausePeriod",
+    render: (_, record) => {
+      const { pauseStartDate, pauseEndDate } = record;
+      if (pauseStartDate && pauseEndDate) {
+        return `${new Date(pauseStartDate).toLocaleDateString()} - ${new Date(pauseEndDate).toLocaleDateString()}`;
+      }
+      return "--";
+    },
+  },
+  {
+    title: "Modification Details",
+    key: "modificationDetails",
+    render: (_, record) => {
+      const { modifyStartDate, modifyEndDate, modifyQuantity } = record;
+      if (modifyStartDate || modifyEndDate || modifyQuantity) {
+        const startDate = modifyStartDate ? new Date(modifyStartDate).toLocaleDateString() : "--";
+        const endDate = modifyEndDate ? new Date(modifyEndDate).toLocaleDateString() : "--";
+        const quantity = modifyQuantity ?? "--";
+        return `Start: ${startDate}, End: ${endDate}, Quantity: ${quantity}`;
+      }
+      return "--";
+    },
+  },
+    {
       title: "Status",
       dataIndex: "status",
       key: "status",

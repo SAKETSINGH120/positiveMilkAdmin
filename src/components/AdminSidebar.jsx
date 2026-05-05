@@ -377,6 +377,7 @@ import { GiTakeMyMoney } from "react-icons/gi";
 import { FaArrowRightToBracket, FaMoneyBillTransfer } from "react-icons/fa6";
 import {
   RiCoupon3Line,
+  RiWallet3Fill,
   RiEBike2Fill,
   RiLockPasswordLine,
 } from "react-icons/ri";
@@ -578,6 +579,12 @@ const AdminSidebar = ({ collapsed, settingData }) => {
                 onClick: () => navigate("/admin/order/category_order"),
                 permissions: ["LIST_FOOD_ORDERS"],
               },
+              {
+                key: "order-failed",
+                label: "Failed Orders",
+                onClick: () => navigate("/admin/order/failed-orders"),
+                permissions: [],
+              },
 
               // {
               //   key: 'order-grocery',
@@ -616,6 +623,13 @@ const AdminSidebar = ({ collapsed, settingData }) => {
             icon: <RiEBike2Fill size={18} />,
             label: "Driver",
             onClick: () => navigate("/admin/driver"),
+            permissions: ["LIST_DRIVERS"],
+          },
+          {
+            key: "driver-collection",
+            icon: <RiWallet3Fill size={18} />,
+            label: "Driver Cash Collection",
+            onClick: () => navigate("/admin/driver-collection"),
             permissions: ["LIST_DRIVERS"],
           },
         ],

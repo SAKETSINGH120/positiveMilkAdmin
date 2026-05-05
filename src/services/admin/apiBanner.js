@@ -35,3 +35,12 @@ export const deleteBanner = async (id) => {
         message.error('Error deleting banner');
     }
 }
+
+export const updateBanner = async (id, formData) => {
+    try {
+        const response = await axiosInstance.patch(`/api/admin/banner/update/${id}`, formData, { headers: { "Content-Type": "multipart/form-data" } });
+        return response;
+    } catch (error) {
+        message.error('Error updating banner');
+    }
+}

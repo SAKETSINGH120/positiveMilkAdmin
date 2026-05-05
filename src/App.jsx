@@ -78,9 +78,11 @@ import AdminPermissionsModal from "./pages/admin/ManageAdmin/components/AdminPer
 import SubscriptionList from "./pages/admin/subscriptions/SubscriptionList";
 import SubscriptionDetails from "./pages/admin/subscriptions/components/SubscriptionDetails";
 import CategorywiseOrders from "./pages/admin/Order/components/CategorywiseOrder";
+import FailedOrders from "./pages/admin/Order/FailedOrders";
 import SupportList from "./pages/admin/support/SupportList";
 import UserLowBalanceList from "./pages/admin/balance/UserLowbalanceListing";
 import ReportsList from "./pages/admin/report/ReportsList";
+import DriverCollection from "./pages/admin/DriverCollection/DriverCollection";
 
 function App() {
   return (
@@ -122,6 +124,7 @@ function App() {
           <Route path="shop/:shopId" element={<ShopDetails />} />
           <Route path="order/:type" element={<Order />} />
           <Route path="order/category_order" element={<CategorywiseOrders />} />
+          <Route path="order/failed-orders" element={<FailedOrders />} />
           {/* <Route path='order' element={<Order />} /> */}
           <Route path="order/:type/:orderId" element={<OrderDetailsPage />} />
           <Route path="request/:type" element={<PaymentRequest />} />
@@ -157,6 +160,7 @@ function App() {
           />
           <Route path="support" element={<SupportList />} />
           <Route path="low-balance-lists" element={<UserLowBalanceList />} />
+          <Route path="driver-collection" element={<DriverCollection />} />
         </Route>
 
         {/* vendor route */}

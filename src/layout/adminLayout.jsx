@@ -12,7 +12,7 @@
 
 //     return (
 //         <>
-//         <title>GoRabit | Admin Panel</title>
+//         <title>positiveMilk | Admin Panel</title>
 //             <Layout>
 //                 <AdminSidebar collapsed={collapsed} setCollapsed={setCollapsed} />
 //                 <Layout>

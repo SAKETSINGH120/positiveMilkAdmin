@@ -1,6 +1,6 @@
 import { Avatar, Button, Space, Switch, Table, Tag, Input } from "antd";
 import { FaTrash, FaUser, FaHistory } from "react-icons/fa";
-import { IoMdEye } from "react-icons/io";
+import { IoMdEye, IoMdWallet } from "react-icons/io";
 import { useNavigate } from "react-router";
 import { useState, useMemo } from "react";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
@@ -9,7 +9,8 @@ const UserTable = ({
   data,
   onToggleBlock,
   loading,
-  onShowHistory = () => {},
+  onShowHistory = () => { },
+  onWalletClick = () => { },
 }) => {
   const navigate = useNavigate();
   const [searchText, setSearchText] = useState("");
@@ -80,6 +81,11 @@ const UserTable = ({
       dataIndex: "mobileNo",
       key: "mobileNo",
       align: "center",
+    }, {
+      title: "Wallet",
+      dataIndex: "wallet",
+      key: "wallet",
+      align: "center",
     },
     // {
     //   title: "Go Coin",
@@ -111,6 +117,20 @@ const UserTable = ({
         <Tag color="orange">{record.remainingBottles || 0}</Tag>
       ),
     },
+    // {
+    //   title: "Driver Cash Collection",
+    //   key: "DriverCashCollectionStatus",
+    //   align: "center",
+    //   render: (_, record) => {
+    //     const status = record.DriverCashCollectionStatus || "none";
+    //     const color = status === "received" ? "green" : status === "pending" ? "orange" : status === "cancelled" ? "red" : "default";
+    //     return (
+    //       <Tag color={color}>
+    //         {status === "none" ? "No Collection" : status.toUpperCase()}
+    //       </Tag>
+    //     );
+    //   },
+    // },
     {
       title: "Status",
       key: "status",
@@ -140,6 +160,12 @@ const UserTable = ({
             type="primary"
             icon={<IoMdEye />}
             onClick={() => navigate(`${record._id}`)}
+          ></Button>
+          <Button
+            type="default"
+            icon={<IoMdWallet className="text-blue-500" />}
+            onClick={() => onWalletClick(record)}
+            title="Update Wallet"
           ></Button>
           {/* <Button
             type="default"

@@ -10,6 +10,7 @@ import {
   RiShoppingBasketLine,
   RiFolderLine,
   RiStackLine,
+  RiErrorWarningLine,
 } from "react-icons/ri";
 
 function StaticsData({ data, loading }) {
@@ -65,12 +66,18 @@ function StaticsData({ data, loading }) {
       count: data.subscriptionOrderCount,
       color: "#3b82f6",
     },
+    {
+      name: "Today's Failed Orders",
+      icon: <RiErrorWarningLine />,
+      count: data.todaysFailedOrdersCount ?? 0,
+      color: "#ef4444",
+    },
   ];
 
   if (loading) return <Spin size="large" />;
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-7 gap-4 p-4">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-8 gap-4 p-4">
       {staticData.map((data, index) => (
         <motion.div
           key={data.name}

@@ -32,6 +32,7 @@ const OrderTable = ({ searchText, type, service, onCountsUpdate }) => {
     setLoading(true);
     try {
       const res = await getAllOrder(service, type);
+      console.log(res.orders[0], "ressssssssssssssss");
       setOrders(res.orders || []);
       if (res.counts && onCountsUpdate) {
         onCountsUpdate(res.counts);
@@ -119,6 +120,12 @@ const OrderTable = ({ searchText, type, service, onCountsUpdate }) => {
       align: "center",
     },
     {
+      title: "Phone Number",
+      key: "mobileNo",
+      align: "center",
+      render: (record) => record.userId?.mobileNo,
+    },
+    {
       title: "Delivery Date",
       dataIndex: "deliveryDate",
       key: "deliveryDate",
@@ -137,6 +144,13 @@ const OrderTable = ({ searchText, type, service, onCountsUpdate }) => {
       key: "pincode",
       align: "center",
       render: (pincode) => `${pincode}`,
+    },
+    {
+      title: "Address",
+      dataIndex: "address",
+      key: "address",
+      align: "center",
+      render: (address) => `${address || "N/A"}`,
     },
     {
       title: "Total Amount",

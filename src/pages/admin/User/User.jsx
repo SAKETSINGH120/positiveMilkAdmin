@@ -1,8 +1,10 @@
 import { Modal, Tabs, message } from 'antd'
 import React, { useEffect, useState } from 'react'
 import UserTable from './components/UserTable'
+import WalletHistoryTable from './components/WalletHistoryTable'
+import WalletUpdateModal from './components/WalletUpdateModal'
 import GocoinHistoryModal from './components/GocoinHistoryModal'
-import { getAllUser, blockUser, getUserGocoinHistory } from '../../../services/admin/apiUser'
+import { getAllUser, blockUser, getUserGocoinHistory, updateUserWallet } from '../../../services/admin/apiUser'
 
 function User() {
     const [user, setUser] = useState([]);
@@ -21,6 +23,11 @@ function User() {
     const [selectedUser, setSelectedUser] = useState(null);
     const [gocoinHistory, setGocoinHistory] = useState([]);
     const [historyLoading, setHistoryLoading] = useState(false);
+
+    // Wallet modal state
+    const [isWalletModalVisible, setIsWalletModalVisible] = useState(false);
+    const [selectedWalletUser, setSelectedWalletUser] = useState(null);
+    const [walletLoading, setWalletLoading] = useState(false);
 
     const fetchUser = async (type = activeTab) => {
         setLoading(true);
@@ -72,6 +79,30 @@ function User() {
         setGocoinHistory([]);
     };
 
+    const handleOpenWalletModal = (user) => {
+        setSelectedWalletUser(user);
+        setIsWalletModalVisible(true);
+    };
+
+    const handleCloseWalletModal = () => {
+        setIsWalletModalVisible(false);
+        setSelectedWalletUser(null);
+    };
+
+    const handleUpdateWallet = async (userId, data) => {
+        setWalletLoading(true);
+        try {
+            await updateUserWallet(userId, data);
+            message.success("Wallet updated successfully");
+            handleCloseWalletModal();
+            fetchUser();
+        } catch (error) {
+            message.error(error.response?.data?.message || "Failed to update wallet");
+        } finally {
+            setWalletLoading(false);
+        }
+    };
+
     const handleDelete = (user) => {
         Modal.confirm({
             title: 'Delete User',
@@ -84,7 +115,7 @@ function User() {
             }
         });
     };
-
+    console.log("userCounts", userCounts)
     const tabItems = [
         {
             key: 'new',
@@ -106,6 +137,11 @@ function User() {
             key: 'all',
             label: `All (${userCounts.all})`,
         },
+        {
+            key: 'Wallet History',
+            label: `Wallet History (${userCounts.wallet || 0})`,
+        },
+
     ];
 
     return (
@@ -119,14 +155,31 @@ function User() {
                     className="mb-6"
                 />
 
-                <UserTable
-                    onDelete={handleDelete}
-                    data={user}
-                    onToggleBlock={handleToggleBlock}
-                    onShowHistory={handleShowHistory}
-                    loading={loading}
-                />
+                {activeTab === 'Wallet History' ? (
+                    <WalletHistoryTable
+                        data={user}
+                        loading={loading}
+                    />
+                ) : (
+                    <UserTable
+                        onDelete={handleDelete}
+                        data={user}
+                        onToggleBlock={handleToggleBlock}
+                        onShowHistory={handleShowHistory}
+                        onWalletClick={handleOpenWalletModal}
+                        loading={loading}
+                    />
+                )}
             </div>
+
+            {/* Wallet Update Modal */}
+            <WalletUpdateModal
+                visible={isWalletModalVisible}
+                user={selectedWalletUser}
+                onUpdate={handleUpdateWallet}
+                onClose={handleCloseWalletModal}
+                loading={walletLoading}
+            />
 
             {/* Gocoin History Modal */}
             <GocoinHistoryModal

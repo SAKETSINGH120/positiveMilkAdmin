@@ -1,7 +1,7 @@
 import { Tabs, message } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { changeOrderStatus, getAllOrder } from '../../../services/vendor/apiOrder';
-import NewOrder from './components/newOrder';
+import NewOrder from './components/NewOrder';
 import AllOrdersTable from './components/AllOrdersTable';
 import { useNavigate } from 'react-router';
 

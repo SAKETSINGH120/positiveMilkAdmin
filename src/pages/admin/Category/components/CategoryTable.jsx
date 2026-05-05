@@ -31,7 +31,7 @@ const CategoryTable = ({
           {image ? (
             <img src={`${BASE_URL}/${image}`} />
           ) : (
-            <img src="/go-rabit-logo.png" />
+            <img src="/positive_milk_logo.png" />
           )}
         </Avatar>
       ),
@@ -117,7 +117,7 @@ const CategoryTable = ({
   ];
 
   const filtredData = data.filter((item) =>
-    item?.name?.toLowerCase().includes(searchText.toLowerCase())
+    item?.name?.toLowerCase().includes(searchText.toLowerCase()),
   );
 
   return (

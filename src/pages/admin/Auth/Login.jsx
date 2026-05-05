@@ -39,7 +39,7 @@ function Login() {
         {/* Left image */}
         <div className="hidden lg:flex w-1/2 justify-center items-center bg-gray-200">
           <img
-            src="/go-rabit-logo.png"
+            src="/positive_milk_logo.png"
             alt="Login Visual"
             className="object-cover w-80 h-80"
           />
