@@ -53,9 +53,7 @@ const FailedOrders = () => {
     {
       title: "Mobile No.",
       key: "mobileNo",
-      render: (_, record) => (
-        <Text>{record?.userId?.mobileNo || "N/A"}</Text>
-      ),
+      render: (_, record) => <Text>{record?.userId?.mobileNo || "N/A"}</Text>,
     },
     {
       title: "Razorpay Order ID",
@@ -93,6 +91,11 @@ const FailedOrders = () => {
         </Tag>
       ),
     },
+    {
+      title: "Error Logs.",
+      key: "errLog",
+      render: (_, record) => <Text>{record?.errLog || "N/A"}</Text>,
+    },
   ];
 
   return (
@@ -128,7 +131,11 @@ const FailedOrders = () => {
         ) : orders.length === 0 ? (
           <div style={{ textAlign: "center", padding: "60px 0" }}>
             <WarningOutlined
-              style={{ fontSize: "48px", color: "#d9d9d9", marginBottom: "16px" }}
+              style={{
+                fontSize: "48px",
+                color: "#d9d9d9",
+                marginBottom: "16px",
+              }}
             />
             <div>
               <Text type="secondary" style={{ fontSize: "16px" }}>

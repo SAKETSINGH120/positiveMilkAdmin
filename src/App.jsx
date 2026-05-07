@@ -78,6 +78,7 @@ import AdminPermissionsModal from "./pages/admin/ManageAdmin/components/AdminPer
 import SubscriptionList from "./pages/admin/subscriptions/SubscriptionList";
 import SubscriptionDetails from "./pages/admin/subscriptions/components/SubscriptionDetails";
 import CategorywiseOrders from "./pages/admin/Order/components/CategorywiseOrder";
+import SubCategorywiseOrders from "./pages/admin/Order/components/SubCategorywiseOrder";
 import FailedOrders from "./pages/admin/Order/FailedOrders";
 import SupportList from "./pages/admin/support/SupportList";
 import UserLowBalanceList from "./pages/admin/balance/UserLowbalanceListing";
@@ -124,6 +125,7 @@ function App() {
           <Route path="shop/:shopId" element={<ShopDetails />} />
           <Route path="order/:type" element={<Order />} />
           <Route path="order/category_order" element={<CategorywiseOrders />} />
+          <Route path="order/subcategory_order" element={<SubCategorywiseOrders />} />
           <Route path="order/failed-orders" element={<FailedOrders />} />
           {/* <Route path='order' element={<Order />} /> */}
           <Route path="order/:type/:orderId" element={<OrderDetailsPage />} />

@@ -580,6 +580,12 @@ const AdminSidebar = ({ collapsed, settingData }) => {
                 permissions: ["LIST_FOOD_ORDERS"],
               },
               {
+                key: "order-subcategorywise",
+                label: "subcategory Orders",
+                onClick: () => navigate("/admin/order/subcategory_order"),
+                permissions: ["LIST_FOOD_ORDERS"],
+              },
+              {
                 key: "order-failed",
                 label: "Failed Orders",
                 onClick: () => navigate("/admin/order/failed-orders"),

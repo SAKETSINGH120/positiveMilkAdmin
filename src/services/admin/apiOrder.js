@@ -127,3 +127,17 @@ export const getCategorywiseOrderDetails = async () => {
     throw error;
   }
 };
+
+// Get subcategorywise order details
+export const getSubCategorywiseOrderDetails = async () => {
+  try {
+    const response = await axiosInstance.get(`/api/admin/subcategoryOrderCount`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching subcategory order details:", error);
+    message.error(
+      error.response?.data?.message || "Error fetching subcategory order details"
+    );
+    throw error;
+  }
+};

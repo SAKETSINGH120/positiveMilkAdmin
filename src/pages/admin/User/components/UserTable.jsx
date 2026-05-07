@@ -1,6 +1,7 @@
 import { Avatar, Button, Space, Switch, Table, Tag, Input } from "antd";
 import { FaTrash, FaUser, FaHistory } from "react-icons/fa";
 import { IoMdEye, IoMdWallet } from "react-icons/io";
+import { MdRemoveCircle } from "react-icons/md";
 import { useNavigate } from "react-router";
 import { useState, useMemo } from "react";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
@@ -9,8 +10,9 @@ const UserTable = ({
   data,
   onToggleBlock,
   loading,
-  onShowHistory = () => { },
-  onWalletClick = () => { },
+  onShowHistory = () => {},
+  onWalletClick = () => {},
+  onDeductClick = () => {},
 }) => {
   const navigate = useNavigate();
   const [searchText, setSearchText] = useState("");
@@ -43,7 +45,7 @@ const UserTable = ({
       (user) =>
         (user.name &&
           user.name.toLowerCase().includes(searchText.toLowerCase())) ||
-        (user.mobileNo && user.mobileNo.includes(searchText))
+        (user.mobileNo && user.mobileNo.includes(searchText)),
     );
   }, [data, searchText]);
 
@@ -81,7 +83,8 @@ const UserTable = ({
       dataIndex: "mobileNo",
       key: "mobileNo",
       align: "center",
-    }, {
+    },
+    {
       title: "Wallet",
       dataIndex: "wallet",
       key: "wallet",
@@ -166,6 +169,13 @@ const UserTable = ({
             icon={<IoMdWallet className="text-blue-500" />}
             onClick={() => onWalletClick(record)}
             title="Update Wallet"
+          ></Button>
+          <Button
+            type="default"
+            danger
+            icon={<MdRemoveCircle className="text-red-500" />}
+            onClick={() => onDeductClick(record)}
+            title="Deduct Balance"
           ></Button>
           {/* <Button
             type="default"
